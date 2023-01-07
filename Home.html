@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">  
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.2.0/css/dataTables.dateTime.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/plug-ins/1.10.19/filtering/row-based/range_dates.js">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+        <!-- add data button -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalAdd">
+            Add Data
+        </button>
+
+        <!-- add button model -->
+        <div class="modal fade" id="exampleModalAdd" >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel1">Add Customer data</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form id="Add_form">
+                        <div class="form-row">
+                          <div class="form-group col-md-5">
+                            <label for="inputName1">Name</label>
+                            <input name="inputname1" type="Name" class="form-control" id="inputName1" placeholder="Name">
+                          </div>
+                          <div class="form-group col-md-5">
+                            <label for="inputPhone1">Phone No.</label>
+                            <input name="inputphone1" type="tel" class="form-control" id="inputPhone1" placeholder="Phone">
+                          </div>
+                          <div class="form-group col-md-2">
+                            <button type="button" class="btn btn-primary" onclick="check_data()">Check</button>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <label for="inputHouse1">House No.</label>
+                                <input name="inputhouse1" type="text" class="form-control" id="inputHouse1" placeholder="1234 Main St">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputStatus1">Status</label>
+                                <select name="inputstatus1" class="form-control" id="inputStatus1">
+                                    <option selected value="PENDING">PENDING</option>
+                                    <option value="DONE">DONE</option>
+                                    <option value="VISIT AGAIN">VISIT AGAIN</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputStreet1">Street</label>
+                          <input name="inputstreet1" type="text" class="form-control" id="inputStreet1" placeholder="Apartment, studio, or floor">
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-5">
+                            <label for="inputCity1">City</label>
+                            <input name="inputcity1" type="text" class="form-control" id="inputCity1">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="inputState1">State</label>
+                            <select name="inputstate1" id="inputState1" class="form-control">
+                                <option value="DELHI">DELHI</option>
+                                <option value="NCR">NCR</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="inputZip1">Zip</label>
+                            <input name="inputzip1" type="text" class="form-control" id="inputZip1">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputInstruction1">Instructions</label>
+                            <input name="inputinstruction1" type="text" class="form-control" id="inputInstruction1" placeholder="Ex. come before 9PM">
+                        </div>
+                        <!-- <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                              Check me out
+                            </label>
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign in</button> -->
+                      </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" onclick="add_data()" id="add_button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!-- min max date field -->
+        <table cellspacing="5" cellpadding="5">
+            <tbody>
+                <tr>
+                    <td>Minimum date:</td>
+                    <td><input type="text" id="min" name="min"></td>
+                </tr>
+                <tr>
+                    <td>Maximum date:</td>
+                    <td><input type="text" id="max" name="max"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- datatable -->
+        <div><h2>Customer datatable</h2></div>
+
+        <table id="example" class="display" style="width:180%">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Warning</th>
+                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Phone No.</th>
+                    <th>House No.</th>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Pincode</th> 
+                    <th>Created At</th>  
+                    <th>Plumber Name</th>
+                    <th>Done Date</th>
+                    <th>Client Issue</th>
+                    <th>Amount Paid</th>
+                    <th>Count</th>
+                    <th>History</th>
+                    <th>Instructions</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <!-- <tfoot>
+                <tr>
+                    <th>Id</th>
+                    <th>Status</th>
+                    <th>Name</th>   
+                    <th>Phone No.</th>
+                    <th>House No.</th>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
+                    <th>Count</th>
+                    <th>Created At</th>
+                    <th>Done Date</th>
+                    <th>History</th>
+                </tr>
+            </tfoot> -->
+        </table>
+
+        <!-- Edit button -->
+        <div class="Edit_buttton">
+            
+            <div class="modal fade" id="exampleModalEdit" >
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Enter Data You want to Edit (Leave other fields Blank)</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="Edit_form">
+                            <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName2">Name</label>
+                                <input name="inputname2" type="Name" class="form-control" id="inputName2" placeholder="Name">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPhone2">Phone No.</label>
+                                <input name="inputphone2" type="tel" class="form-control" id="inputPhone2" placeholder="Phone">
+                            </div>
+                            </div>
+                            <div class="form-group">
+                            <label for="inputHouse2">House No.</label>
+                            <input name="inputhouse2" type="text" class="form-control" id="inputHouse2" placeholder="1234 Main St">
+                            </div>
+                            <div class="form-group">
+                            <label for="inputStreet2">Street</label>
+                            <input name="inputstreet2" type="text" class="form-control" id="inputStreet2" placeholder="Apartment, studio, or floor">
+                            </div>
+                            <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label for="inputCity2">City</label>
+                                <input name="inputcity2" type="text" class="form-control" id="inputCity2">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputState2">State</label>
+                                <select name="inputstate2" id="inputState2" class="form-control">
+                                    <option value="DELHI">Delhi</option>
+                                    <option value="NCR">NCR</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputZip2">Zip</label>
+                                <input name="inputzip2" type="text" class="form-control" id="inputZip2">
+                            </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="inputStatus2">Status</label>
+                                    <select name="inputstatus2" class="form-control" id="inputStatus2">
+                                        <option value="PENDING">PENDING</option>
+                                        <option value="DONE">DONE</option>
+                                        <option value="VISIT AGAIN">VISIT AGAIN</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="inputPlumber2">Plumber Name</label>
+                                    <input name="inputplumber2" type="Name" id="inputPlumber2" class="form-control">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputAmount2">Amount</label>
+                                    <input name="inputamount2" type="Number" class="form-control" id="inputAmount2">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputIssue2">Client Issue</label>
+                                <input name="inputissue2" type="text" class="form-control" id="inputIssue2" placeholder="Ex. Water leakage....">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputInstruction2">Instructions</label>
+                                <input name="inputinstruction2" type="text" class="form-control" id="inputInstruction2" placeholder="Ex. come before 9PM">
+                            </div>
+                            <input type="hidden" id="hid" name="hid">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="edit_data()" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- history button model -->
+        <div class="modal fade" id="exampleModalHistory" >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel1">History</h5>
+                  <button onclick="window.location.reload()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body history-body">
+                    <table id="History_table">
+                        <tr style="border: 1px solid black;">
+                          <th style="border: 1px solid black;padding: 10px;">Plumber Name</th>
+                          <th style="border: 1px solid black;padding: 10px;">Issue</th>
+                          <th style="border: 1px solid black;padding: 10px;">Amount Paid</th>
+                          <th style="border: 1px solid black;padding: 10px;">Created At</th>
+                          <th style="border: 1px solid black;padding: 10px;">Done Date</th>
+                        </tr>
+                      </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" onclick="window.location.reload()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+   
+    <!-- script file related to datatables and script js -->
+    <script type="text/javascript" src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/datetime/1.2.0/js/dataTables.dateTime.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+</body>
+
+</html>

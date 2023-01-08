@@ -7,10 +7,23 @@ const { stringify } = require("querystring");
 const { ifError } = require("assert");
 var cors = require('cors');
 require('mongoose-long')(mongoose);
+const dotenv =require("dotenv");
+const connectDatabase=require("./config/database");
+
+// mongoose.connect('mongodb://0.0.0.0:27017/CustomerDetails', {useNewUrlParser: true, useUnifiedTopology:true});
+// const port = 8080;
+
+// config
+dotenv.config({path:"./config/config.env"});
+
+//connecting database
+connectDatabase();
 
 
-mongoose.connect('mongodb://0.0.0.0:27017/CustomerDetails', {useNewUrlParser: true, useUnifiedTopology:true});
-const port = 8080;
+
+const server = app.listen(process.env.PORT,()=>{
+    console.log(`Server is working on http://localhost:${process.env.PORT}`);
+});
 
 
 const contactSchema = new mongoose.Schema({
@@ -437,6 +450,6 @@ app.delete('/del/:id',function(req,res){
 
 })
 
-app.listen(port,()=>{
-    console.log(`The application started sucessfully on port ${port}`);
-})
+// app.listen(port,()=>{
+//     console.log(`The application started sucessfully on port ${port}`);
+// })

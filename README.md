@@ -7,7 +7,10 @@ video url for help
 
 2) needed vscode
 
-3) then clone the git folder
+3) 
+then clone the git folder
+https://www.youtube.com/watch?v=Vl4Gl-ut1XI
+video url for help
 
 4) then open that folder in vscode
 

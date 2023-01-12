@@ -208,7 +208,7 @@ function add_data(){
         });
 
         // message to send at the time of new query
-        var message="your query is received";
+        var message= "Hi! Thanks for bringing the problem to our notice. Just wanted to let you know we have registered your complaint and will be at your service soon.%0D%0A%0D%0ALooking forward to resolving your issue.%0D%0A…%0D%0AVolga Bath Fittings";
         
         alert("Data Added");
         // $.ajax({
@@ -307,7 +307,7 @@ function edit_data(){
                 alert("Data edited");
                 if(ustatus=="DONE"){
                     //message to send after status is done
-                    var message="Thanks for Connecting with us";
+                    var message="Hi! Your issue has been successfully resolved and hoping you are satisfied with the service. Would love to hear your feedback about the same.%0D%0A%0D%0AReally grateful for your patience! %0D%0A…%0D%0AVolga Bath Fittings";
                     let input = "https://web.whatsapp.com/send?phone=91"+uphone+"&text="+message;
                     window.open(input,'_blank');
                 }

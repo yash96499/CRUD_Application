@@ -168,6 +168,12 @@ function add_data(){
         ustate="-";
     }
     var ustatus=form.get('inputstatus1');
+    if(ustatus=="DONE"){
+        var doneConfirm = confirm("Are you sure (STATUS=DONE)?");
+        if (doneConfirm == true) {
+            ustatus="DONE";
+        }else ustatus="PENDING";
+    }
     if(!ustatus){
         ustatus="PENDING";
     }
@@ -208,19 +214,23 @@ function add_data(){
         });
 
         // message to send at the time of new query
-        var message= "Hi! Thanks for bringing the problem to our notice. Just wanted to let you know we have registered your complaint and will be at your service soon.%0D%0A%0D%0ALooking forward to resolving your issue.%0D%0A…%0D%0AVolga Bath Fittings";
+        var message1= "Hi! Thanks for bringing the problem to our notice. Just wanted to let you know we have registered your complaint and will be at your service soon.%0D%0A%0D%0ALooking forward to resolving your issue.%0D%0A…%0D%0AVolga Bath Fittings";
+        
+        var message2="Hi! Your issue has been successfully resolved and hoping you are satisfied with the service. Would love to hear your feedback about the same.%0D%0A%0D%0AReally grateful for your patience! %0D%0A…%0D%0AVolga Bath Fittings";
         
         alert("Data Added");
-        // $.ajax({
-        //     url: "https://web.whatsapp.com/send?phone="+uphone+"&text="+message,
-        //     type:"GET"
-        //     })
-        // let btnOpen=document.getElementById("add_button");
-
-        let input = "https://web.whatsapp.com/send?phone=91"+uphone+"&text="+message;
-        window.open(input,'_blank');
-
-       
+    
+        if(ustatus=="PENDING"){
+            let input = "https://web.whatsapp.com/send?phone=91"+uphone+"&text="+message1;
+        // let mywind=
+            window.open(input,'_blank');
+        }
+        if(ustatus=="DONE"){
+            let input = "https://web.whatsapp.com/send?phone=91"+uphone+"&text="+message2;
+        // let mywind=
+            window.open(input,'_blank');
+        }
+    
         window.location.reload();
 }
 

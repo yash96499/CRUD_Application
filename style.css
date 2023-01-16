@@ -75,3 +75,9 @@ table.dataTable tbody th, table.dataTable tbody td {
 i{
     font-size: 25px !important;
 }
+.footer{
+    background:#000;
+    color: whitesmoke;
+    padding: 2px 5px;
+    margin: 15px;
+}

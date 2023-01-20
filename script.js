@@ -1,7 +1,7 @@
 var store={};
 var table;
 var xmlhttp = new XMLHttpRequest();
-var url = "http://localhost:8080/fetchall";
+var url = "/fetchall";
 xmlhttp.open("Get",url,true);
 xmlhttp.send();
 xmlhttp.onreadystatechange = function(){
@@ -197,7 +197,7 @@ function add_data(){
     // console.log("uinstruction",uinstruction);
 
     $.ajax ({
-               url : "http://localhost:8080/post",
+               url : "/post",
                type : "POST",
                dataType : "text",
                data : {
@@ -292,7 +292,7 @@ function edit_data(){
     // console.log("uinstruction",uinstruction);
     
         $.ajax ({
-            url : "http://localhost:8080/update?id="+row.id+"&arrId="+aId,                    //how to pass id and arrId
+            url : "/update?id="+row.id+"&arrId="+aId,                    //how to pass id and arrId
             type : "PUT",
             dataType : "text",
             data : {
@@ -336,7 +336,7 @@ function Delete_Data(rowid){
     if (deleteConfirm == true) {
     //    AJAX request
     $.ajax({
-        url: "http://localhost:8080/del/"+rowid,
+        url: "/del/"+rowid,
         type: "DELETE",
 
         })

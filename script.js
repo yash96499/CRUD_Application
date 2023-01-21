@@ -1,5 +1,6 @@
 var store={};
 var table;
+var minDate, maxDate;
 var xmlhttp = new XMLHttpRequest();
 var url = "/api/fetchall";
 xmlhttp.open("Get",url,true);
@@ -442,42 +443,42 @@ function Delete_Data(rowid){
     // table.ajax.reload();
 }
 
-var minDate, maxDate;
-    $.fn.dataTable.ext.search.push(
-        function( settings, data, dataIndex ) {
-            var min = minDate.val();
-            var max = maxDate.val();
-            var date = new Date( data[10] );
-            if(min){
-            let d1 = ("0" + min.getDate()).slice(-2);
-            let m1 = ("0" + (min.getMonth() + 1)).slice(-2);
-            let y1 = min.getFullYear();
-            min=d1+"-"+m1+"-"+y1;
-            }
-            if(max){
-            let d2 = ("0" + max.getDate()).slice(-2);
-            let m2 = ("0" + (max.getMonth() + 1)).slice(-2);
-            let y2 = max.getFullYear();
-            max=d2+"-"+m2+"-"+y2;
-            }
-            if(date){
-                let d = ("0" + date.getDate()).slice(-2);
-                let m = ("0"+(date.getMonth() + 1)).slice(-2);
-                let y = date.getFullYear();
-                date=m+"-"+d+"-"+y;
-            }
-            console.log("date",min,max,date);
-            if (
-                ( min === null && max === null ) ||
-                ( min === null && date <= max ) ||
-                ( min <= date   && max === null ) ||
-                ( min <= date   && date <= max )
-            ) {
-                return true;
-            }
-            return false;
+
+$.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        var min = minDate.val();
+        var max = maxDate.val();
+        // var date = new Date(data[10]);
+        var date=data[10];
+        const [d, m, y] = date.split('-');
+        console.log("data",data);
+        if(min){
+        let d1 = ("0" + min.getDate()).slice(-2);
+        let m1 = ("0" + (min.getMonth() + 1)).slice(-2);
+        let y1 = min.getFullYear();
+        min=new Date(y1+"-"+m1+"-"+d1);
         }
-    );
+        if(max){
+        let d2 = ("0" + max.getDate()).slice(-2);
+        let m2 = ("0" + (max.getMonth() + 1)).slice(-2);
+        let y2 = max.getFullYear();
+        max=new Date(y2+"-"+m2+"-"+d2);
+        }
+        if(date){
+            date=new Date(y+"-"+m+"-"+d);
+        }
+        // console.log("date",min,max,date);
+        if (
+            ( min === null && max === null ) ||
+            ( min === null && date <= max ) ||
+            ( min <= date   && max === null ) ||
+            ( min <= date   && date <= max )
+        ) {
+            return true;
+        }
+        return false;
+    }
+);
 $('#min, #max').on('change', function () {
     if(table){
         table.draw();

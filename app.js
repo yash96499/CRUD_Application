@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const app = express();
@@ -7,23 +8,21 @@ const { stringify } = require("querystring");
 const { ifError } = require("assert");
 var cors = require('cors');
 require('mongoose-long')(mongoose);
-const dotenv =require("dotenv");
 const connectDatabase=require("./config/database");
+const { Router } = require("express");
 
 // mongoose.connect('mongodb://0.0.0.0:27017/CustomerDetails', {useNewUrlParser: true, useUnifiedTopology:true});
 // const port = 8080;
 
 // config
-dotenv.config({path:"./config/config.env"});
 
 //connecting database
-connectDatabase();
-
-
-
-const server = app.listen(process.env.PORT,()=>{
-    console.log(`Server is working on http://localhost:${process.env.PORT}`);
+connectDatabase(function () {
+    app.listen(process.env.PORT,()=>{
+        console.log(`Server is working on http://localhost:${process.env.PORT}`);
+    });
 });
+
 
 
 const contactSchema = new mongoose.Schema({
@@ -119,19 +118,20 @@ const Counter = mongoose.model('Counter', counterSchema);
 
 app.use(cors()); 
 app.use(express.json());
-app.use(express.urlencoded())
-
-app.use(express.static(path.join(__dirname,"./")));
-app.get("*", function(_,res){
+app.use(express.urlencoded());
+app.use(express.static(path.join(__dirname,"./public")));
+app.get("/", function(_,res){
     res.sendFile(
-        path.join(__dirname, "./Home.html"),
+        path.join(__dirname, "./public/Home.html"),
         function(err){
             res.status(500).send(err);
         }
-    );
+    );  
 });
 
-app.post('/post',(req, res)=>{
+const router = Router();
+
+router.post('/post',(req, res)=>{
     let date_time = new Date();
     let date = ("0" + date_time.getDate()).slice(-2);
     let month = ("0" + (date_time.getMonth() + 1)).slice(-2);
@@ -302,7 +302,7 @@ app.post('/post',(req, res)=>{
     
 })
 
-app.put("/update", (req,res)=>{
+router.put("/update", (req,res)=>{
 
     let date_time = new Date();
     let date = ("0" + date_time.getDate()).slice(-2);
@@ -398,7 +398,7 @@ app.put("/update", (req,res)=>{
     })
 })
 
-app.get('/fetch/:id',function(req,res){
+router.get('/fetch/:id',function(req,res){
     const fetchid=req.params.id;
     Customer.find(({id:fetchid}),function(err,val){
         if(err){
@@ -413,7 +413,7 @@ app.get('/fetch/:id',function(req,res){
     })
 })
 
-app.get('/fetch/:Created',function(req,res){
+router.get('/fetch/:Created',function(req,res){
     const fetchCreated=req.query.Created;
     Customer.find(({Created:fetchCreated}),function(err,val){
         if(err){
@@ -428,7 +428,7 @@ app.get('/fetch/:Created',function(req,res){
     })
 })
 
-app.get('/fetchall',function(req,res){
+router.get('/fetchall',function(req,res){
     Customer.find(function(err,val){
         if(err){
             res.send("ERRORR ",err)
@@ -442,7 +442,7 @@ app.get('/fetchall',function(req,res){
     })
 })
 
-app.delete('/del/:id',function(req,res){
+router.delete('/del/:id',function(req,res){
     let delid=req.params.id;
 
     Customer.findOneAndDelete(({id:delid}),function(err,docs){
@@ -459,6 +459,7 @@ app.delete('/del/:id',function(req,res){
 
 })
 
+app.use("/api", router);
 // app.listen(port,()=>{
 //     console.log(`The application started sucessfully on port ${port}`);
 // })

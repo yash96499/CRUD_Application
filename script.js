@@ -1,7 +1,7 @@
 var store={};
 var table;
 var xmlhttp = new XMLHttpRequest();
-var url = "/fetchall";
+var url = "/api/fetchall";
 xmlhttp.open("Get",url,true);
 xmlhttp.send();
 xmlhttp.onreadystatechange = function(){
@@ -97,6 +97,102 @@ xmlhttp.onreadystatechange = function(){
         });
     }
 }
+
+// function testing(){
+//     $.ajax ({
+//         url : "/api/fetchall",                    //how to pass id and arrId
+//         type : "GET",
+//         success:function() {
+//             store.data = JSON.parse(this.responseText);
+//         // console.log("label",data);
+//             minDate = new DateTime($('#min'), {
+//                 format: 'DD-MM-YYYY'
+//             });
+//             maxDate = new DateTime($('#max'), {
+//                 format: 'DD-MM-YYYY'
+//             });
+//             table=$('#example').DataTable({
+//             // ajax: 'data/objects.txt',
+//                 dom: 'Blfrtip',
+//                 "data":store.data,
+//                 columns: [
+//                 { data: 'id' },
+//                 {data:null,
+//                     render: function(row) {
+//                         if(row.count>1){
+//                             // alert("Duplicate Entry");
+//                             return row.warn="Warning!!"+" "+`<i class='fa fa-warning' style='color: red'></i>`;
+//                         }else{
+//                             return row.warn="-";
+//                         }
+//                         // return  
+//                         // `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalHistory" onclick='show_data(${row.id})'>history</button>`;
+     
+//                     }
+//                 },
+//                 { data: 'status' },
+//                 { data: 'name' },
+//                 { data: 'phone' },
+//                 { data: 'building_no' },
+//                 { data: 'street' },
+//                 { data: 'city' },
+//                 { data: 'state' },
+//                 { data: 'zip_code' },
+//                 { data: 'Created' },
+//                 { data: 'plumber' },
+//                 { data: 'Done_date' },
+//                 { data: 'issue' },
+//                 { data: 'Amount' },
+//                 { data: 'count' },
+//                 {data:null,
+//                     render: function(row) {
+//                         return `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalHistory" onclick='show_data(${row.id})'>history</button>`;
+     
+//                     }
+//                 },
+//                 {data:'Instruction'},
+//                 {data:null,
+//                     render: function(row) {
+//                         return `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit" onclick='Edit(${row.id})'>Edit</button>
+                        
+                        
+                        
+//                         &nbsp;&nbsp;&nbsp; 
+//                         <button type="button" class="btn btn-primary"  onclick='Delete_Data(${row.id})'>Delete</button>`;
+//                     },
+//                 },
+//             ],
+//             buttons:[
+//                 //  'copy', 'csv', 'excel', 'pdf', 'print',
+//                         'excel',
+//                         {
+//                         //     {   extend: 'print',
+//                         //         text: 'Print current page',
+//                         //         title:'',
+//                         //         exportOptions: {
+//                         //             modifier: {
+//                         //                 page: 'current'
+//                         //             }
+//                         //         }
+//                         //     },
+//                         //     {   
+//                                     extend: 'pdfHtml5',
+//                                     text: 'PDF',
+//                                     orientation: 'landscape',
+//                                     pageSize: 'LEGAL',
+//                                     exportOptions: {
+//                                         modifier: {
+//                                             page: 'current'
+//                                         }
+//                                     }
+//                         //     }
+//                         }
+//                     ]
+                    
+//             });
+//         }
+//     });
+// }
 
 function show_data(rowid){
     
@@ -197,7 +293,7 @@ function add_data(){
     // console.log("uinstruction",uinstruction);
 
     $.ajax ({
-               url : "/post",
+               url : "/api/post",
                type : "POST",
                dataType : "text",
                data : {
@@ -292,7 +388,7 @@ function edit_data(){
     // console.log("uinstruction",uinstruction);
     
         $.ajax ({
-            url : "/update?id="+row.id+"&arrId="+aId,                    //how to pass id and arrId
+            url : "/api/update?id="+row.id+"&arrId="+aId,                    //how to pass id and arrId
             type : "PUT",
             dataType : "text",
             data : {
@@ -336,7 +432,7 @@ function Delete_Data(rowid){
     if (deleteConfirm == true) {
     //    AJAX request
     $.ajax({
-        url: "/del/"+rowid,
+        url: "/api/del/"+rowid,
         type: "DELETE",
 
         })

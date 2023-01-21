@@ -119,10 +119,10 @@ const Counter = mongoose.model('Counter', counterSchema);
 app.use(cors()); 
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(express.static(path.join(__dirname,"./public")));
+app.use(express.static(path.join(__dirname,"./")));
 app.get("/", function(_,res){
     res.sendFile(
-        path.join(__dirname, "./public/Home.html"),
+        path.join(__dirname, "./Home.html"),
         function(err){
             res.status(500).send(err);
         }

@@ -22,12 +22,22 @@ xmlhttp.onreadystatechange = function(){
             "data":store.data,
             pageLength:50,
             columns: [
+                {data:null,
+                    render: function(row) {
+                        return `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit" onclick='Edit(${row.id})'>Edit</button>
+                        
+                        
+                        
+                        &nbsp;&nbsp;&nbsp; 
+                        <button type="button" class="btn btn-primary"  onclick='Delete_Data(${row.id})'>Delete</button>`;
+                    },
+                },
                 { data: 'id' },
                 {data:null,
                     render: function(row) {
                         if(row.count>1){
                             // alert("Duplicate Entry");
-                            return row.warn="Warning!!"+" "+`<i class='fa fa-warning' style='color: red'></i>`;
+                            return row.warn="!!"+" "+`<i class='fa fa-warning' style='color: red'></i>`;
                         }else{
                             return row.warn="-";
                         }
@@ -41,9 +51,7 @@ xmlhttp.onreadystatechange = function(){
                 { data: 'phone' },
                 { data: 'building_no' },
                 { data: 'street' },
-                { data: 'city' },
                 { data: 'state' },
-                { data: 'zip_code' },
                 { data: 'Created' },
                 { data: 'plumber' },
                 { data: 'Done_date' },
@@ -57,16 +65,7 @@ xmlhttp.onreadystatechange = function(){
                     }
                 },
                 {data:'Instruction'},
-                {data:null,
-                    render: function(row) {
-                        return `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit" onclick='Edit(${row.id})'>Edit</button>
-                        
-                        
-                        
-                        &nbsp;&nbsp;&nbsp; 
-                        <button type="button" class="btn btn-primary"  onclick='Delete_Data(${row.id})'>Delete</button>`;
-                    },
-                },
+                
             ],
             buttons:[
                 //  'copy', 'csv', 'excel', 'pdf', 'print',
@@ -449,7 +448,7 @@ $.fn.dataTable.ext.search.push(
         var min = minDate.val();
         var max = maxDate.val();
         // var date = new Date(data[10]);
-        var date=data[10];
+        var date=data[9];
         const [d, m, y] = date.split('-');
         console.log("data",data);
         if(min){

@@ -50,19 +50,9 @@ const contactSchema = new mongoose.Schema({
         // required:[true,"please enter street"],
         default:"-",
     },
-    city:{
-        type:String,
-        // required:[true,"please enter city"],
-        default:"-",
-    },
     state:{
         type:String,
         // required:[true,"please enter state"],
-    },
-    zip_code:{
-        type:Number,
-        // required:[true,"please enter pincode"],
-        default:0,
     },
     plumber:{
         type:String,
@@ -143,9 +133,9 @@ router.post('/post',(req, res)=>{
     Customer.find( { $or: [ { phone:req.body.phone },
                         { $and: [{building_no:req.body.building_no.toUpperCase().trim()},
                                 {street:req.body.street.toUpperCase().trim()},
-                                {city:req.body.city.toUpperCase().trim()},
-                                {state:req.body.state.toUpperCase().trim()},
-                                {zip_code:req.body.zip_code}
+                                
+                                {state:req.body.state.toUpperCase().trim()}
+                                
                         ] }
                         ] 
                     }
@@ -184,16 +174,7 @@ router.post('/post',(req, res)=>{
                 }
             )
 
-            // var myData = new Customer({
-            //     count:req.body.count+1,
-            //     updated: year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds
-            // })
-            // myData.save().then(()=>{
-            //     res.send("this item saved successfully")
-            // })
-            // .catch(()=>{
-            //     res.status(400).send("Not Saved Successfully")
-            // })
+           
         }else{
             Counter.findOneAndUpdate(
                 {id:"autoval"},
@@ -217,9 +198,9 @@ router.post('/post',(req, res)=>{
                         phone: req.body.phone&&req.body.phone.trim(),
                         building_no: req.body.building_no&&req.body.building_no.toUpperCase().trim(),
                         street: req.body.street&&req.body.street.toUpperCase().trim(),
-                        city: req.body.city&&req.body.city.toUpperCase().trim(),
+                      
                         state: req.body.state&&req.body.state.toUpperCase().trim(),
-                        zip_code: req.body.zip_code,
+                       
                         plumber: "-",
                         Instruction:req.body.instructions,
                         Amount:0,
@@ -240,12 +221,7 @@ router.post('/post',(req, res)=>{
                     myData.save().then(()=>{
                         res.send("this item saved successfully")
 
-                        // wbm.start().then(async () => {
-                        //     const phones = [req.body.phone];
-                        //     const message = 'Good Morning.';
-                        //     await wbm.send(phones, message);
-                        //     await wbm.end();
-                        // }).catch(err => console.log(err));
+         
 
                     }).catch(()=>{
                         res.status(400).send("Not Saved Successfully")
@@ -258,47 +234,6 @@ router.post('/post',(req, res)=>{
         res.status(400).send("Not Saved Successfully")
     })
 
-    // Counter.findOneAndUpdate(
-    //     {id:"autoval"},
-    //     {"$inc":{"seq":1}},
-    //     {new:true},(err,cd)=>{
-
-    //        let seqId;
-    //         if(cd==null)
-    //         {
-    //             const newval= new Counter({id:"autoval",seq:1})
-    //             newval.save()
-    //             seqId=1
-    //         }else{
-    //             seqId=cd.seq
-    //         }
-
-    //         var myData = new Customer({
-    //             id:seqId,
-    //             name: req.body.name,
-    //             phone: req.body.phone,
-    //             building_no:req.body.building_no,
-    //             street:req.body.street,
-    //             city:req.body.city,
-    //             state:req.body.state,
-    //             zip_code:req.body.zip_code,
-    //             plumber: req.body.plumber,
-    //             status: req.body.status,
-    //             issue: req.body.issue,
-    //             count:req.body.count,
-    //             Created: year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds,
-    //             updated: year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds,
-    //             history:[{plumber_name:req.body.plumber,client_issue:req.body.issue,client_Date:year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds}]
-    //         });
-    //         // console.log(myData,req.body);
-    //         myData.save().then(()=>{
-    //             res.send("this item saved successfully")
-    //         }).catch(()=>{
-    //             res.status(400).send("Not Saved Successfully")
-    //         })
-    //         // res.status(200).render('contact.pug')
-    //     }
-    // )
     
 })
 
@@ -308,9 +243,6 @@ router.put("/update", (req,res)=>{
     let date = ("0" + date_time.getDate()).slice(-2);
     let month = ("0" + (date_time.getMonth() + 1)).slice(-2);
     let year = date_time.getFullYear();
-    // let hours = date_time.getHours();
-    // let minutes = date_time.getMinutes();
-    // let seconds = date_time.getSeconds();
 
 
     const upid=req.query.id;
@@ -330,9 +262,9 @@ router.put("/update", (req,res)=>{
                 let upphone=req.body.phone&&req.body.phone.trim();
                 let upbuilding_no=req.body.building_no&&req.body.building_no.toUpperCase().trim();
                 let upstreet=req.body.street&&req.body.street.toUpperCase().trim();
-                let upcity=req.body.city&&req.body.city.toUpperCase().trim();
+                
                 let upstate=req.body.state&&req.body.state.toUpperCase().trim();
-                let upzip_code=req.body.zip_code;
+                
                 let upplumber=req.body.plumber&&req.body.plumber.trim();
                 let upissue=req.body.issue&&req.body.issue.trim();
                 let upInstruction=req.body.instructions;
@@ -344,14 +276,6 @@ router.put("/update", (req,res)=>{
                     upDone_date=date + "-" + month + "-" + year;
                 }
             
-                // oldData.history.map(x=>{
-                //     console.log('x ',x,arrId);
-                //     if(x.arrId==arrId){
-                //     console.log('plum ', req.body.plumber);
-                //     x.plumber_name = req.body.plumber || x.plumber_name;
-                //     x.client_issue = req.body.issue || x.client_issue;
-                //     x.client_Date=year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
-                // }});
 
                 oldData.history[arrId].plumber_name=req.body.plumber || oldData.history[arrId].plumber_name;
                 oldData.history[arrId].client_issue=req.body.issue || oldData.history[arrId].client_issue;
@@ -367,9 +291,9 @@ router.put("/update", (req,res)=>{
                             phone:upphone,
                             building_no:upbuilding_no,
                             street:upstreet,
-                            city:upcity,
+                      
                             state:upstate,
-                            zip_code:upzip_code,
+                        
                             plumber:upplumber,
                             issue:upissue,
                             Instruction:upInstruction,

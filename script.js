@@ -98,102 +98,6 @@ xmlhttp.onreadystatechange = function(){
     }
 }
 
-// function testing(){
-//     $.ajax ({
-//         url : "/api/fetchall",                    //how to pass id and arrId
-//         type : "GET",
-//         success:function() {
-//             store.data = JSON.parse(this.responseText);
-//         // console.log("label",data);
-//             minDate = new DateTime($('#min'), {
-//                 format: 'DD-MM-YYYY'
-//             });
-//             maxDate = new DateTime($('#max'), {
-//                 format: 'DD-MM-YYYY'
-//             });
-//             table=$('#example').DataTable({
-//             // ajax: 'data/objects.txt',
-//                 dom: 'Blfrtip',
-//                 "data":store.data,
-//                 columns: [
-//                 { data: 'id' },
-//                 {data:null,
-//                     render: function(row) {
-//                         if(row.count>1){
-//                             // alert("Duplicate Entry");
-//                             return row.warn="Warning!!"+" "+`<i class='fa fa-warning' style='color: red'></i>`;
-//                         }else{
-//                             return row.warn="-";
-//                         }
-//                         // return  
-//                         // `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalHistory" onclick='show_data(${row.id})'>history</button>`;
-     
-//                     }
-//                 },
-//                 { data: 'status' },
-//                 { data: 'name' },
-//                 { data: 'phone' },
-//                 { data: 'building_no' },
-//                 { data: 'street' },
-//                 { data: 'city' },
-//                 { data: 'state' },
-//                 { data: 'zip_code' },
-//                 { data: 'Created' },
-//                 { data: 'plumber' },
-//                 { data: 'Done_date' },
-//                 { data: 'issue' },
-//                 { data: 'Amount' },
-//                 { data: 'count' },
-//                 {data:null,
-//                     render: function(row) {
-//                         return `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalHistory" onclick='show_data(${row.id})'>history</button>`;
-     
-//                     }
-//                 },
-//                 {data:'Instruction'},
-//                 {data:null,
-//                     render: function(row) {
-//                         return `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit" onclick='Edit(${row.id})'>Edit</button>
-                        
-                        
-                        
-//                         &nbsp;&nbsp;&nbsp; 
-//                         <button type="button" class="btn btn-primary"  onclick='Delete_Data(${row.id})'>Delete</button>`;
-//                     },
-//                 },
-//             ],
-//             buttons:[
-//                 //  'copy', 'csv', 'excel', 'pdf', 'print',
-//                         'excel',
-//                         {
-//                         //     {   extend: 'print',
-//                         //         text: 'Print current page',
-//                         //         title:'',
-//                         //         exportOptions: {
-//                         //             modifier: {
-//                         //                 page: 'current'
-//                         //             }
-//                         //         }
-//                         //     },
-//                         //     {   
-//                                     extend: 'pdfHtml5',
-//                                     text: 'PDF',
-//                                     orientation: 'landscape',
-//                                     pageSize: 'LEGAL',
-//                                     exportOptions: {
-//                                         modifier: {
-//                                             page: 'current'
-//                                         }
-//                                     }
-//                         //     }
-//                         }
-//                     ]
-                    
-//             });
-//         }
-//     });
-// }
-
 function show_data(rowid){
     
     let row=getDataByRowId(rowid);
@@ -228,9 +132,7 @@ function check_data(){
         $('#inputPhone1').val(row.phone);
         $('#inputHouse1').val(row.building_no);
         $('#inputStreet1').val(row.street);
-        $('#inputCity1').val(row.city);
         $('#inputState1').val(row.state);
-        $('#inputZip1').val(row.zip_code);
         $('#inputInstruction1').val(row.Instruction);
     }
 }
@@ -255,10 +157,6 @@ function add_data(){
     if(!ustreet){
         ustreet="-";
     }
-    var ucity =  form.get('inputcity1');
-    if(!ucity){
-        ucity="-";
-    }
     var ustate =  form.get('inputstate1');
     if(!ustate){
         ustate="-";
@@ -272,10 +170,6 @@ function add_data(){
     }
     if(!ustatus){
         ustatus="PENDING";
-    }
-    var uzip =  form.get('inputzip1');
-    if(!uzip){
-        uzip=0;
     }
     var uinstruction =  form.get('inputinstruction1');
     if(!uinstruction){
@@ -301,10 +195,8 @@ function add_data(){
                     phone: uphone,
                     building_no:uhouse,
                     street : ustreet,
-                    city : ucity,
                     state:ustate,
                     status:ustatus,
-                    zip_code: uzip,
                     instructions:uinstruction
                }
         });
@@ -319,12 +211,12 @@ function add_data(){
         if(ustatus=="PENDING"){
             let input = "https://web.whatsapp.com/send?phone=91"+uphone+"&text="+message1;
         // let mywind=
-            window.open(input,'_top');
+            window.open(input,'_self');
         }
         if(ustatus=="DONE"){
             let input = "https://web.whatsapp.com/send?phone=91"+uphone+"&text="+message2;
         // let mywind=
-            window.open(input,'_top');
+            window.open(input,'_self');
         }
     
         window.location.reload();
@@ -337,9 +229,7 @@ function Edit(rowid){
     $('#inputPhone2').val(row.phone);
     $('#inputHouse2').val(row.building_no);
     $('#inputStreet2').val(row.street);
-    $('#inputCity2').val(row.city);
     $('#inputState2').val(row.state);
-    $('#inputZip2').val(row.zip_code);
     $('#inputStatus2').val(row.status);
     $('#inputPlumber2').val(row.plumber);
     $('#inputAmount2').val(row.Amount);
@@ -355,9 +245,7 @@ function edit_data(){
     var uphone =  form.get('inputphone2');
     var uhouse =  form.get('inputhouse2');
     var ustreet =  form.get('inputstreet2');
-    var ucity =  form.get('inputcity2');
     var ustate =  form.get('inputstate2');
-    var uzip =  form.get('inputzip2');
     var ustatus =  form.get('inputstatus2');
     var uplumber =  form.get('inputplumber2');
     var uamount =  form.get('inputamount2');
@@ -396,9 +284,7 @@ function edit_data(){
                  phone: uphone,
                  building_no:uhouse,
                  street : ustreet,
-                 city : ucity,
                  state:ustate,
-                 zip_code: uzip,
                  plumber:uplumber,
                  Amount:uamount,
                  Instruction:uinstruction,
@@ -415,7 +301,7 @@ function edit_data(){
                     //message to send after status is done
                     var message="Hi! Your issue has been successfully resolved and hoping you are satisfied with the service. Would love to hear your feedback about the same.%0D%0A%0D%0AReally grateful for your patience! %0D%0A…%0D%0A*Volga Bath Fittings*";
                     let input = "https://web.whatsapp.com/send?phone=91"+uphone+"&text="+message;
-                    window.open(input,'_top');
+                    window.open(input,'_self');
                 }
                 window.location.reload();
             }

@@ -319,12 +319,12 @@ function add_data(){
         if(ustatus=="PENDING"){
             let input = "https://web.whatsapp.com/send?phone=91"+uphone+"&text="+message1;
         // let mywind=
-            window.open(input,"_parent");
+            window.open(input,'_top');
         }
         if(ustatus=="DONE"){
             let input = "https://web.whatsapp.com/send?phone=91"+uphone+"&text="+message2;
         // let mywind=
-            window.open(input,"_parent");
+            window.open(input,'_top');
         }
     
         window.location.reload();
@@ -415,7 +415,7 @@ function edit_data(){
                     //message to send after status is done
                     var message="Hi! Your issue has been successfully resolved and hoping you are satisfied with the service. Would love to hear your feedback about the same.%0D%0A%0D%0AReally grateful for your patience! %0D%0A…%0D%0A*Volga Bath Fittings*";
                     let input = "https://web.whatsapp.com/send?phone=91"+uphone+"&text="+message;
-                    window.open(input,"_parent");
+                    window.open(input,'_top');
                 }
                 window.location.reload();
             }
